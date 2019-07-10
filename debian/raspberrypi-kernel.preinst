@@ -10,10 +10,8 @@ dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/b
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/bcm2710-rpi-3-b-plus.dtb /boot/bcm2710-rpi-3-b-plus.dtb
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/bcm2710-rpi-3-b.dtb /boot/bcm2710-rpi-3-b.dtb
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/bcm2710-rpi-cm3.dtb /boot/bcm2710-rpi-cm3.dtb
-dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/bcm2711-rpi-4-b.dtb /boot/bcm2711-rpi-4-b.dtb
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/kernel.img /boot/kernel.img
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/kernel7.img /boot/kernel7.img
-dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/kernel7l.img /boot/kernel7l.img
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/COPYING.linux /boot/COPYING.linux
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/README /boot/overlays/README
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/adau1977-adc.dtbo /boot/overlays/adau1977-adc.dtbo

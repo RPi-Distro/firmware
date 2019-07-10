@@ -44,11 +44,6 @@ if [ -f /usr/share/rpikernelhack/bcm2710-rpi-cm3.dtb ]; then
 	dpkg-divert --package rpikernelhack --rename --remove /boot/bcm2710-rpi-cm3.dtb
 	sync
 fi
-if [ -f /usr/share/rpikernelhack/bcm2711-rpi-4-b.dtb ]; then
-	rm -f /boot/bcm2711-rpi-4-b.dtb
-	dpkg-divert --package rpikernelhack --rename --remove /boot/bcm2711-rpi-4-b.dtb
-	sync
-fi
 if [ -f /usr/share/rpikernelhack/kernel.img ]; then
 	rm -f /boot/kernel.img
 	dpkg-divert --package rpikernelhack --rename --remove /boot/kernel.img
@@ -57,11 +52,6 @@ fi
 if [ -f /usr/share/rpikernelhack/kernel7.img ]; then
 	rm -f /boot/kernel7.img
 	dpkg-divert --package rpikernelhack --rename --remove /boot/kernel7.img
-	sync
-fi
-if [ -f /usr/share/rpikernelhack/kernel7l.img ]; then
-	rm -f /boot/kernel7l.img
-	dpkg-divert --package rpikernelhack --rename --remove /boot/kernel7l.img
 	sync
 fi
 if [ -f /usr/share/rpikernelhack/COPYING.linux ]; then

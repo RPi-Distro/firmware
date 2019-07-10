@@ -1,5 +1,19 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Source: http://github.com/raspberrypi/firmware
+Files-Excluded:
+ boot/bcm2711-rpi-4-b.dtb
+ boot/fixup4cd.dat
+ boot/fixup4.dat
+ boot/fixup4db.dat
+ boot/fixup4x.dat
+ boot/kernel7l.img
+ boot/start4cd.elf
+ boot/start4db.elf
+ boot/start4.elf
+ boot/start4x.elf
+ headers/lib/modules/*-v7l+
+ headers/usr/src/*-v7l+
+ modules/*-v7l+
 
 Files:
  opt/vc/bin/*

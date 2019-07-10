@@ -1,3 +1,10 @@
+raspberrypi-firmware (1.20190709~stretch-1) stretch; urgency=medium
+
+  * firmware as of 356f5c2880a3c7e8774025aa6fc934a617553e7b
+  * stretch build - strip out Pi 4 files
+
+ -- Serge Schneider <serge@raspberrypi.org>  Wed, 10 Jul 2019 13:48:07 +0100
+
 raspberrypi-firmware (1.20190709-1) buster; urgency=medium
 
   * firmware as of 356f5c2880a3c7e8774025aa6fc934a617553e7b

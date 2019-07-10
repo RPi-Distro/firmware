@@ -2,18 +2,6 @@
 rm -f /boot/start.elf
 dpkg-divert --package rpikernelhack --rename --remove /boot/start.elf
 sync
-rm -f /boot/start4.elf
-dpkg-divert --package rpikernelhack --rename --remove /boot/start4.elf
-sync
-rm -f /boot/start4cd.elf
-dpkg-divert --package rpikernelhack --rename --remove /boot/start4cd.elf
-sync
-rm -f /boot/start4db.elf
-dpkg-divert --package rpikernelhack --rename --remove /boot/start4db.elf
-sync
-rm -f /boot/start4x.elf
-dpkg-divert --package rpikernelhack --rename --remove /boot/start4x.elf
-sync
 rm -f /boot/start_cd.elf
 dpkg-divert --package rpikernelhack --rename --remove /boot/start_cd.elf
 sync
@@ -25,18 +13,6 @@ dpkg-divert --package rpikernelhack --rename --remove /boot/start_x.elf
 sync
 rm -f /boot/fixup.dat
 dpkg-divert --package rpikernelhack --rename --remove /boot/fixup.dat
-sync
-rm -f /boot/fixup4.dat
-dpkg-divert --package rpikernelhack --rename --remove /boot/fixup4.dat
-sync
-rm -f /boot/fixup4cd.dat
-dpkg-divert --package rpikernelhack --rename --remove /boot/fixup4cd.dat
-sync
-rm -f /boot/fixup4db.dat
-dpkg-divert --package rpikernelhack --rename --remove /boot/fixup4db.dat
-sync
-rm -f /boot/fixup4x.dat
-dpkg-divert --package rpikernelhack --rename --remove /boot/fixup4x.dat
 sync
 rm -f /boot/fixup_cd.dat
 dpkg-divert --package rpikernelhack --rename --remove /boot/fixup_cd.dat

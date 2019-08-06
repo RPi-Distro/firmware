@@ -64,6 +64,11 @@ if [ -f /usr/share/rpikernelhack/overlays/README ]; then
 	dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/README
 	sync
 fi
+if [ -f /usr/share/rpikernelhack/overlays/act-led.dtbo ]; then
+	rm -f /boot/overlays/act-led.dtbo
+	dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/act-led.dtbo
+	sync
+fi
 if [ -f /usr/share/rpikernelhack/overlays/adau1977-adc.dtbo ]; then
 	rm -f /boot/overlays/adau1977-adc.dtbo
 	dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/adau1977-adc.dtbo
@@ -187,6 +192,16 @@ fi
 if [ -f /usr/share/rpikernelhack/overlays/dionaudio-loco.dtbo ]; then
 	rm -f /boot/overlays/dionaudio-loco.dtbo
 	dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/dionaudio-loco.dtbo
+	sync
+fi
+if [ -f /usr/share/rpikernelhack/overlays/disable-bt.dtbo ]; then
+	rm -f /boot/overlays/disable-bt.dtbo
+	dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/disable-bt.dtbo
+	sync
+fi
+if [ -f /usr/share/rpikernelhack/overlays/disable-wifi.dtbo ]; then
+	rm -f /boot/overlays/disable-wifi.dtbo
+	dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/disable-wifi.dtbo
 	sync
 fi
 if [ -f /usr/share/rpikernelhack/overlays/dpi18.dtbo ]; then
@@ -512,6 +527,11 @@ fi
 if [ -f /usr/share/rpikernelhack/overlays/midi-uart1.dtbo ]; then
 	rm -f /boot/overlays/midi-uart1.dtbo
 	dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/midi-uart1.dtbo
+	sync
+fi
+if [ -f /usr/share/rpikernelhack/overlays/miniuart-bt.dtbo ]; then
+	rm -f /boot/overlays/miniuart-bt.dtbo
+	dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/miniuart-bt.dtbo
 	sync
 fi
 if [ -f /usr/share/rpikernelhack/overlays/mmc.dtbo ]; then
@@ -943,17 +963,17 @@ if [ -f /etc/default/raspberrypi-kernel ]; then
 
 fi
 if [ -d "/etc/kernel/postinst.d" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.57+ --arg=/boot/kernel.img /etc/kernel/postinst.d
-  run-parts -v --report --exit-on-error --arg=4.19.57-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d
-  run-parts -v --report --exit-on-error --arg=4.19.57-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=4.19.58+ --arg=/boot/kernel.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=4.19.58-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=4.19.58-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d
 fi
-if [ -d "/etc/kernel/postinst.d/4.19.57+" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.57+ --arg=/boot/kernel.img /etc/kernel/postinst.d/4.19.57+
+if [ -d "/etc/kernel/postinst.d/4.19.58+" ]; then
+  run-parts -v --report --exit-on-error --arg=4.19.58+ --arg=/boot/kernel.img /etc/kernel/postinst.d/4.19.58+
 fi
-if [ -d "/etc/kernel/postinst.d/4.19.57-v7+" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.57-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d/4.19.57-v7+
+if [ -d "/etc/kernel/postinst.d/4.19.58-v7+" ]; then
+  run-parts -v --report --exit-on-error --arg=4.19.58-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d/4.19.58-v7+
 fi
-if [ -d "/etc/kernel/postinst.d/4.19.57-v7l+" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.57-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d/4.19.57-v7l+
+if [ -d "/etc/kernel/postinst.d/4.19.58-v7l+" ]; then
+  run-parts -v --report --exit-on-error --arg=4.19.58-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d/4.19.58-v7l+
 fi
 #DEBHELPER#

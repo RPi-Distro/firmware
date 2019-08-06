@@ -8,19 +8,19 @@ if [ -f /etc/default/raspberrypi-kernel ]; then
 
 fi
 if [ -d "/etc/kernel/header_postinst.d" ]; then
-  run-parts -v --verbose --exit-on-error --arg=4.19.57+ /etc/kernel/header_postinst.d
-  run-parts -v --verbose --exit-on-error --arg=4.19.57-v7+ /etc/kernel/header_postinst.d
-  run-parts -v --verbose --exit-on-error --arg=4.19.57-v7l+ /etc/kernel/header_postinst.d
+  run-parts -v --verbose --exit-on-error --arg=4.19.58+ /etc/kernel/header_postinst.d
+  run-parts -v --verbose --exit-on-error --arg=4.19.58-v7+ /etc/kernel/header_postinst.d
+  run-parts -v --verbose --exit-on-error --arg=4.19.58-v7l+ /etc/kernel/header_postinst.d
 fi
 
-if [ -d "/etc/kernel/header_postinst.d/4.19.57+" ]; then
-  run-parts -v --verbose --exit-on-error --arg=4.19.57+ /etc/kernel/header_postinst.d/4.19.57+
+if [ -d "/etc/kernel/header_postinst.d/4.19.58+" ]; then
+  run-parts -v --verbose --exit-on-error --arg=4.19.58+ /etc/kernel/header_postinst.d/4.19.58+
 fi
 
-if [ -d "/etc/kernel/header_postinst.d/4.19.57-v7+" ]; then
-  run-parts -v --verbose --exit-on-error --arg=4.19.57-v7+ /etc/kernel/header_postinst.d/4.19.57-v7+
+if [ -d "/etc/kernel/header_postinst.d/4.19.58-v7+" ]; then
+  run-parts -v --verbose --exit-on-error --arg=4.19.58-v7+ /etc/kernel/header_postinst.d/4.19.58-v7+
 fi
-if [ -d "/etc/kernel/header_postinst.d/4.19.57-v7l+" ]; then
-  run-parts -v --verbose --exit-on-error --arg=4.19.57-v7l+ /etc/kernel/header_postinst.d/4.19.57-v7l+
+if [ -d "/etc/kernel/header_postinst.d/4.19.58-v7l+" ]; then
+  run-parts -v --verbose --exit-on-error --arg=4.19.58-v7l+ /etc/kernel/header_postinst.d/4.19.58-v7l+
 fi
 #DEBHELPER#

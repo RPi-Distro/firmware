@@ -14,6 +14,7 @@ dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/k
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/kernel7.img /boot/kernel7.img
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/COPYING.linux /boot/COPYING.linux
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/README /boot/overlays/README
+dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/act-led.dtbo /boot/overlays/act-led.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/adau1977-adc.dtbo /boot/overlays/adau1977-adc.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/adau7002-simple.dtbo /boot/overlays/adau7002-simple.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/ads1015.dtbo /boot/overlays/ads1015.dtbo
@@ -39,6 +40,8 @@ dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/o
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/dht11.dtbo /boot/overlays/dht11.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/dionaudio-loco-v2.dtbo /boot/overlays/dionaudio-loco-v2.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/dionaudio-loco.dtbo /boot/overlays/dionaudio-loco.dtbo
+dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/disable-bt.dtbo /boot/overlays/disable-bt.dtbo
+dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/disable-wifi.dtbo /boot/overlays/disable-wifi.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/dpi18.dtbo /boot/overlays/dpi18.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/dpi24.dtbo /boot/overlays/dpi24.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/draws.dtbo /boot/overlays/draws.dtbo
@@ -104,6 +107,7 @@ dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/o
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/media-center.dtbo /boot/overlays/media-center.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/midi-uart0.dtbo /boot/overlays/midi-uart0.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/midi-uart1.dtbo /boot/overlays/midi-uart1.dtbo
+dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/miniuart-bt.dtbo /boot/overlays/miniuart-bt.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/mmc.dtbo /boot/overlays/mmc.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/mpu6050.dtbo /boot/overlays/mpu6050.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/mz61581.dtbo /boot/overlays/mz61581.dtbo
@@ -196,17 +200,17 @@ if [ -f /etc/default/raspberrypi-kernel ]; then
   export RPI_INITRD
 fi
 if [ -d "/etc/kernel/preinst.d" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.57+ --arg=/boot/kernel.img /etc/kernel/preinst.d
-  run-parts -v --report --exit-on-error --arg=4.19.57-v7+ --arg=/boot/kernel7.img /etc/kernel/preinst.d
-  run-parts -v --report --exit-on-error --arg=4.19.57-v7l+ --arg=/boot/kernel7l.img /etc/kernel/preinst.d
+  run-parts -v --report --exit-on-error --arg=4.19.58+ --arg=/boot/kernel.img /etc/kernel/preinst.d
+  run-parts -v --report --exit-on-error --arg=4.19.58-v7+ --arg=/boot/kernel7.img /etc/kernel/preinst.d
+  run-parts -v --report --exit-on-error --arg=4.19.58-v7l+ --arg=/boot/kernel7l.img /etc/kernel/preinst.d
 fi
-if [ -d "/etc/kernel/preinst.d/4.19.57+" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.57+ --arg=/boot/kernel.img /etc/kernel/preinst.d/4.19.57+
+if [ -d "/etc/kernel/preinst.d/4.19.58+" ]; then
+  run-parts -v --report --exit-on-error --arg=4.19.58+ --arg=/boot/kernel.img /etc/kernel/preinst.d/4.19.58+
 fi
-if [ -d "/etc/kernel/preinst.d/4.19.57-v7+" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.57-v7+ --arg=/boot/kernel7.img /etc/kernel/preinst.d/4.19.57-v7+
+if [ -d "/etc/kernel/preinst.d/4.19.58-v7+" ]; then
+  run-parts -v --report --exit-on-error --arg=4.19.58-v7+ --arg=/boot/kernel7.img /etc/kernel/preinst.d/4.19.58-v7+
 fi
-if [ -d "/etc/kernel/preinst.d/4.19.57-v7l+" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.57-v7l+ --arg=/boot/kernel7l.img /etc/kernel/preinst.d/4.19.57-v7l+
+if [ -d "/etc/kernel/preinst.d/4.19.58-v7l+" ]; then
+  run-parts -v --report --exit-on-error --arg=4.19.58-v7l+ --arg=/boot/kernel7l.img /etc/kernel/preinst.d/4.19.58-v7l+
 fi
 #DEBHELPER#

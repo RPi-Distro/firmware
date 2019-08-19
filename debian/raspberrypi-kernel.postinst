@@ -324,6 +324,11 @@ if [ -f /usr/share/rpikernelhack/overlays/hifiberry-dacplusadc.dtbo ]; then
 	dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/hifiberry-dacplusadc.dtbo
 	sync
 fi
+if [ -f /usr/share/rpikernelhack/overlays/hifiberry-dacplusadcpro.dtbo ]; then
+	rm -f /boot/overlays/hifiberry-dacplusadcpro.dtbo
+	dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/hifiberry-dacplusadcpro.dtbo
+	sync
+fi
 if [ -f /usr/share/rpikernelhack/overlays/hifiberry-digi-pro.dtbo ]; then
 	rm -f /boot/overlays/hifiberry-digi-pro.dtbo
 	dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/hifiberry-digi-pro.dtbo
@@ -394,9 +399,19 @@ if [ -f /usr/share/rpikernelhack/overlays/i2c0-bcm2708.dtbo ]; then
 	dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/i2c0-bcm2708.dtbo
 	sync
 fi
+if [ -f /usr/share/rpikernelhack/overlays/i2c0.dtbo ]; then
+	rm -f /boot/overlays/i2c0.dtbo
+	dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/i2c0.dtbo
+	sync
+fi
 if [ -f /usr/share/rpikernelhack/overlays/i2c1-bcm2708.dtbo ]; then
 	rm -f /boot/overlays/i2c1-bcm2708.dtbo
 	dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/i2c1-bcm2708.dtbo
+	sync
+fi
+if [ -f /usr/share/rpikernelhack/overlays/i2c1.dtbo ]; then
+	rm -f /boot/overlays/i2c1.dtbo
+	dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/i2c1.dtbo
 	sync
 fi
 if [ -f /usr/share/rpikernelhack/overlays/i2c3.dtbo ]; then
@@ -963,17 +978,17 @@ if [ -f /etc/default/raspberrypi-kernel ]; then
 
 fi
 if [ -d "/etc/kernel/postinst.d" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.58+ --arg=/boot/kernel.img /etc/kernel/postinst.d
-  run-parts -v --report --exit-on-error --arg=4.19.58-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d
-  run-parts -v --report --exit-on-error --arg=4.19.58-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=4.19.66+ --arg=/boot/kernel.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=4.19.66-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=4.19.66-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d
 fi
-if [ -d "/etc/kernel/postinst.d/4.19.58+" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.58+ --arg=/boot/kernel.img /etc/kernel/postinst.d/4.19.58+
+if [ -d "/etc/kernel/postinst.d/4.19.66+" ]; then
+  run-parts -v --report --exit-on-error --arg=4.19.66+ --arg=/boot/kernel.img /etc/kernel/postinst.d/4.19.66+
 fi
-if [ -d "/etc/kernel/postinst.d/4.19.58-v7+" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.58-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d/4.19.58-v7+
+if [ -d "/etc/kernel/postinst.d/4.19.66-v7+" ]; then
+  run-parts -v --report --exit-on-error --arg=4.19.66-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d/4.19.66-v7+
 fi
-if [ -d "/etc/kernel/postinst.d/4.19.58-v7l+" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.58-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d/4.19.58-v7l+
+if [ -d "/etc/kernel/postinst.d/4.19.66-v7l+" ]; then
+  run-parts -v --report --exit-on-error --arg=4.19.66-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d/4.19.66-v7l+
 fi
 #DEBHELPER#

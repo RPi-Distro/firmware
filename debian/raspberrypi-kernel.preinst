@@ -66,6 +66,7 @@ dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/o
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/hifiberry-dac.dtbo /boot/overlays/hifiberry-dac.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/hifiberry-dacplus.dtbo /boot/overlays/hifiberry-dacplus.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/hifiberry-dacplusadc.dtbo /boot/overlays/hifiberry-dacplusadc.dtbo
+dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/hifiberry-dacplusadcpro.dtbo /boot/overlays/hifiberry-dacplusadcpro.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/hifiberry-digi-pro.dtbo /boot/overlays/hifiberry-digi-pro.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/hifiberry-digi.dtbo /boot/overlays/hifiberry-digi.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/hy28a.dtbo /boot/overlays/hy28a.dtbo
@@ -80,7 +81,9 @@ dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/o
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/i2c-rtc.dtbo /boot/overlays/i2c-rtc.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/i2c-sensor.dtbo /boot/overlays/i2c-sensor.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/i2c0-bcm2708.dtbo /boot/overlays/i2c0-bcm2708.dtbo
+dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/i2c0.dtbo /boot/overlays/i2c0.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/i2c1-bcm2708.dtbo /boot/overlays/i2c1-bcm2708.dtbo
+dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/i2c1.dtbo /boot/overlays/i2c1.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/i2c3.dtbo /boot/overlays/i2c3.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/i2c4.dtbo /boot/overlays/i2c4.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/i2c5.dtbo /boot/overlays/i2c5.dtbo
@@ -200,17 +203,17 @@ if [ -f /etc/default/raspberrypi-kernel ]; then
   export RPI_INITRD
 fi
 if [ -d "/etc/kernel/preinst.d" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.58+ --arg=/boot/kernel.img /etc/kernel/preinst.d
-  run-parts -v --report --exit-on-error --arg=4.19.58-v7+ --arg=/boot/kernel7.img /etc/kernel/preinst.d
-  run-parts -v --report --exit-on-error --arg=4.19.58-v7l+ --arg=/boot/kernel7l.img /etc/kernel/preinst.d
+  run-parts -v --report --exit-on-error --arg=4.19.66+ --arg=/boot/kernel.img /etc/kernel/preinst.d
+  run-parts -v --report --exit-on-error --arg=4.19.66-v7+ --arg=/boot/kernel7.img /etc/kernel/preinst.d
+  run-parts -v --report --exit-on-error --arg=4.19.66-v7l+ --arg=/boot/kernel7l.img /etc/kernel/preinst.d
 fi
-if [ -d "/etc/kernel/preinst.d/4.19.58+" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.58+ --arg=/boot/kernel.img /etc/kernel/preinst.d/4.19.58+
+if [ -d "/etc/kernel/preinst.d/4.19.66+" ]; then
+  run-parts -v --report --exit-on-error --arg=4.19.66+ --arg=/boot/kernel.img /etc/kernel/preinst.d/4.19.66+
 fi
-if [ -d "/etc/kernel/preinst.d/4.19.58-v7+" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.58-v7+ --arg=/boot/kernel7.img /etc/kernel/preinst.d/4.19.58-v7+
+if [ -d "/etc/kernel/preinst.d/4.19.66-v7+" ]; then
+  run-parts -v --report --exit-on-error --arg=4.19.66-v7+ --arg=/boot/kernel7.img /etc/kernel/preinst.d/4.19.66-v7+
 fi
-if [ -d "/etc/kernel/preinst.d/4.19.58-v7l+" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.58-v7l+ --arg=/boot/kernel7l.img /etc/kernel/preinst.d/4.19.58-v7l+
+if [ -d "/etc/kernel/preinst.d/4.19.66-v7l+" ]; then
+  run-parts -v --report --exit-on-error --arg=4.19.66-v7l+ --arg=/boot/kernel7l.img /etc/kernel/preinst.d/4.19.66-v7l+
 fi
 #DEBHELPER#

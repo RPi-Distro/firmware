@@ -8,17 +8,17 @@ if [ -f /etc/default/raspberrypi-kernel ]; then
 
 fi
 if [ -d "/etc/kernel/prerm.d" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.58+ --arg=/boot/kernel.img /etc/kernel/prerm.d
-  run-parts -v --report --exit-on-error --arg=4.19.58-v7+ --arg=/boot/kernel7.img /etc/kernel/prerm.d
-  run-parts -v --report --exit-on-error --arg=4.19.58-v7l+ --arg=/boot/kernel7l.img /etc/kernel/prerm.d
+  run-parts -v --report --exit-on-error --arg=4.19.66+ --arg=/boot/kernel.img /etc/kernel/prerm.d
+  run-parts -v --report --exit-on-error --arg=4.19.66-v7+ --arg=/boot/kernel7.img /etc/kernel/prerm.d
+  run-parts -v --report --exit-on-error --arg=4.19.66-v7l+ --arg=/boot/kernel7l.img /etc/kernel/prerm.d
 fi
-if [ -d "/etc/kernel/prerm.d/4.19.58+" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.58+ --arg=/boot/kernel.img /etc/kernel/prerm.d/4.19.58+
+if [ -d "/etc/kernel/prerm.d/4.19.66+" ]; then
+  run-parts -v --report --exit-on-error --arg=4.19.66+ --arg=/boot/kernel.img /etc/kernel/prerm.d/4.19.66+
 fi
-if [ -d "/etc/kernel/prerm.d/4.19.58-v7+" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.58-v7+ --arg=/boot/kernel7.img /etc/kernel/prerm.d/4.19.58-v7+
+if [ -d "/etc/kernel/prerm.d/4.19.66-v7+" ]; then
+  run-parts -v --report --exit-on-error --arg=4.19.66-v7+ --arg=/boot/kernel7.img /etc/kernel/prerm.d/4.19.66-v7+
 fi
-if [ -d "/etc/kernel/prerm.d/4.19.58-v7l+" ]; then
-  run-parts -v --report --exit-on-error --arg=4.19.58-v7l+ --arg=/boot/kernel7l.img /etc/kernel/prerm.d/4.19.58-v7l+
+if [ -d "/etc/kernel/prerm.d/4.19.66-v7l+" ]; then
+  run-parts -v --report --exit-on-error --arg=4.19.66-v7l+ --arg=/boot/kernel7l.img /etc/kernel/prerm.d/4.19.66-v7l+
 fi
 #DEBHELPER#

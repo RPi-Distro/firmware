@@ -23,7 +23,7 @@ is_pifour() {
   return $?
 }
 
-if [ "$(get_available_space)" -lt "50" ]; then
+if [ "$(get_available_space)" -lt "51" ]; then
   echo "You do not have enough space in /boot to install this package."
   SKIP_FILES=1
   if is_pifour; then
@@ -316,6 +316,16 @@ if [ -f /usr/share/rpikernelhack/overlays/balena-fin.dtbo ]; then
   dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/balena-fin.dtbo
   sync
 fi
+if [ -f /usr/share/rpikernelhack/overlays/camera-mux-2port.dtbo ]; then
+  rm -f /boot/overlays/camera-mux-2port.dtbo
+  dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/camera-mux-2port.dtbo
+  sync
+fi
+if [ -f /usr/share/rpikernelhack/overlays/camera-mux-4port.dtbo ]; then
+  rm -f /boot/overlays/camera-mux-4port.dtbo
+  dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/camera-mux-4port.dtbo
+  sync
+fi
 if [ -f /usr/share/rpikernelhack/overlays/cap1106.dtbo ]; then
   rm -f /boot/overlays/cap1106.dtbo
   dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/cap1106.dtbo
@@ -334,6 +344,11 @@ fi
 if [ -f /usr/share/rpikernelhack/overlays/cutiepi-panel.dtbo ]; then
   rm -f /boot/overlays/cutiepi-panel.dtbo
   dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/cutiepi-panel.dtbo
+  sync
+fi
+if [ -f /usr/share/rpikernelhack/overlays/dacberry400.dtbo ]; then
+  rm -f /boot/overlays/dacberry400.dtbo
+  dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/dacberry400.dtbo
   sync
 fi
 if [ -f /usr/share/rpikernelhack/overlays/dht11.dtbo ]; then
@@ -521,6 +536,11 @@ if [ -f /usr/share/rpikernelhack/overlays/hifiberry-amp100.dtbo ]; then
   dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/hifiberry-amp100.dtbo
   sync
 fi
+if [ -f /usr/share/rpikernelhack/overlays/hifiberry-amp3.dtbo ]; then
+  rm -f /boot/overlays/hifiberry-amp3.dtbo
+  dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/hifiberry-amp3.dtbo
+  sync
+fi
 if [ -f /usr/share/rpikernelhack/overlays/hifiberry-dac.dtbo ]; then
   rm -f /boot/overlays/hifiberry-dac.dtbo
   dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/hifiberry-dac.dtbo
@@ -686,9 +706,19 @@ if [ -f /usr/share/rpikernelhack/overlays/imx296.dtbo ]; then
   dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/imx296.dtbo
   sync
 fi
+if [ -f /usr/share/rpikernelhack/overlays/imx327.dtbo ]; then
+  rm -f /boot/overlays/imx327.dtbo
+  dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/imx327.dtbo
+  sync
+fi
 if [ -f /usr/share/rpikernelhack/overlays/imx378.dtbo ]; then
   rm -f /boot/overlays/imx378.dtbo
   dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/imx378.dtbo
+  sync
+fi
+if [ -f /usr/share/rpikernelhack/overlays/imx462.dtbo ]; then
+  rm -f /boot/overlays/imx462.dtbo
+  dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/imx462.dtbo
   sync
 fi
 if [ -f /usr/share/rpikernelhack/overlays/imx477.dtbo ]; then
@@ -1495,22 +1525,22 @@ if [ -f /etc/default/raspberrypi-kernel ]; then
 
 fi
 if [ -d "/etc/kernel/postinst.d" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.56+ --arg=/boot/kernel.img /etc/kernel/postinst.d
-  run-parts -v --report --exit-on-error --arg=5.15.56-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d
-  run-parts -v --report --exit-on-error --arg=5.15.56-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d
-  run-parts -v --report --exit-on-error --arg=5.15.56-v8+ --arg=/boot/kernel8.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=5.15.61+ --arg=/boot/kernel.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=5.15.61-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=5.15.61-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=5.15.61-v8+ --arg=/boot/kernel8.img /etc/kernel/postinst.d
 fi
-if [ -d "/etc/kernel/postinst.d/5.15.56+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.56+ --arg=/boot/kernel.img /etc/kernel/postinst.d/5.15.56+
+if [ -d "/etc/kernel/postinst.d/5.15.61+" ]; then
+  run-parts -v --report --exit-on-error --arg=5.15.61+ --arg=/boot/kernel.img /etc/kernel/postinst.d/5.15.61+
 fi
-if [ -d "/etc/kernel/postinst.d/5.15.56-v7+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.56-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d/5.15.56-v7+
+if [ -d "/etc/kernel/postinst.d/5.15.61-v7+" ]; then
+  run-parts -v --report --exit-on-error --arg=5.15.61-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d/5.15.61-v7+
 fi
-if [ -d "/etc/kernel/postinst.d/5.15.56-v7l+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.56-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d/5.15.56-v7l+
+if [ -d "/etc/kernel/postinst.d/5.15.61-v7l+" ]; then
+  run-parts -v --report --exit-on-error --arg=5.15.61-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d/5.15.61-v7l+
 fi
-if [ -d "/etc/kernel/postinst.d/5.15.56-v8+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.56-v8+ --arg=/boot/kernel8.img /etc/kernel/postinst.d/5.15.56-v8+
+if [ -d "/etc/kernel/postinst.d/5.15.61-v8+" ]; then
+  run-parts -v --report --exit-on-error --arg=5.15.61-v8+ --arg=/boot/kernel8.img /etc/kernel/postinst.d/5.15.61-v8+
 fi
 if [ -d /usr/share/rpikernelhack/overlays ]; then
   rmdir --ignore-fail-on-non-empty /usr/share/rpikernelhack/overlays

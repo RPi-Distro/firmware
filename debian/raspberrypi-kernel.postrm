@@ -8,21 +8,21 @@ if [ -f /etc/default/raspberrypi-kernel ]; then
 
 fi
 if [ -d "/etc/kernel/postrm.d" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.76+ --arg=/boot/kernel.img /etc/kernel/postrm.d
-  run-parts -v --report --exit-on-error --arg=5.15.76-v7+ --arg=/boot/kernel7.img /etc/kernel/postrm.d
-  run-parts -v --report --exit-on-error --arg=5.15.76-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postrm.d
-  run-parts -v --report --exit-on-error --arg=5.15.76-v8+ --arg=/boot/kernel8.img /etc/kernel/postrm.d
+  run-parts -v --report --exit-on-error --arg=5.15.84+ --arg=/boot/kernel.img /etc/kernel/postrm.d
+  run-parts -v --report --exit-on-error --arg=5.15.84-v7+ --arg=/boot/kernel7.img /etc/kernel/postrm.d
+  run-parts -v --report --exit-on-error --arg=5.15.84-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postrm.d
+  run-parts -v --report --exit-on-error --arg=5.15.84-v8+ --arg=/boot/kernel8.img /etc/kernel/postrm.d
 fi
-if [ -d "/etc/kernel/postrm.d/5.15.76+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.76+ --arg=/boot/kernel.img /etc/kernel/postrm.d/5.15.76+
+if [ -d "/etc/kernel/postrm.d/5.15.84+" ]; then
+  run-parts -v --report --exit-on-error --arg=5.15.84+ --arg=/boot/kernel.img /etc/kernel/postrm.d/5.15.84+
 fi
-if [ -d "/etc/kernel/postrm.d/5.15.76-v7+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.76-v7+ --arg=/boot/kernel7.img /etc/kernel/postrm.d/5.15.76-v7+
+if [ -d "/etc/kernel/postrm.d/5.15.84-v7+" ]; then
+  run-parts -v --report --exit-on-error --arg=5.15.84-v7+ --arg=/boot/kernel7.img /etc/kernel/postrm.d/5.15.84-v7+
 fi
-if [ -d "/etc/kernel/postrm.d/5.15.76-v7l+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.76-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postrm.d/5.15.76-v7l+
+if [ -d "/etc/kernel/postrm.d/5.15.84-v7l+" ]; then
+  run-parts -v --report --exit-on-error --arg=5.15.84-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postrm.d/5.15.84-v7l+
 fi
-if [ -d "/etc/kernel/postrm.d/5.15.76-v8+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.76-v8+ --arg=/boot/kernel8.img /etc/kernel/postrm.d/5.15.76-v8+
+if [ -d "/etc/kernel/postrm.d/5.15.84-v8+" ]; then
+  run-parts -v --report --exit-on-error --arg=5.15.84-v8+ --arg=/boot/kernel8.img /etc/kernel/postrm.d/5.15.84-v8+
 fi
 #DEBHELPER#

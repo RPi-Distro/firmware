@@ -341,9 +341,19 @@ if [ -f /usr/share/rpikernelhack/overlays/cirrus-wm5102.dtbo ]; then
   dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/cirrus-wm5102.dtbo
   sync
 fi
+if [ -f /usr/share/rpikernelhack/overlays/cm-swap-i2c0.dtbo ]; then
+  rm -f /boot/overlays/cm-swap-i2c0.dtbo
+  dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/cm-swap-i2c0.dtbo
+  sync
+fi
 if [ -f /usr/share/rpikernelhack/overlays/cma.dtbo ]; then
   rm -f /boot/overlays/cma.dtbo
   dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/cma.dtbo
+  sync
+fi
+if [ -f /usr/share/rpikernelhack/overlays/crystalfontz-cfa050_pi_m.dtbo ]; then
+  rm -f /boot/overlays/crystalfontz-cfa050_pi_m.dtbo
+  dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/crystalfontz-cfa050_pi_m.dtbo
   sync
 fi
 if [ -f /usr/share/rpikernelhack/overlays/cutiepi-panel.dtbo ]; then
@@ -379,6 +389,11 @@ fi
 if [ -f /usr/share/rpikernelhack/overlays/disable-bt.dtbo ]; then
   rm -f /boot/overlays/disable-bt.dtbo
   dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/disable-bt.dtbo
+  sync
+fi
+if [ -f /usr/share/rpikernelhack/overlays/disable-emmc2.dtbo ]; then
+  rm -f /boot/overlays/disable-emmc2.dtbo
+  dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/disable-emmc2.dtbo
   sync
 fi
 if [ -f /usr/share/rpikernelhack/overlays/disable-wifi.dtbo ]; then
@@ -741,6 +756,11 @@ if [ -f /usr/share/rpikernelhack/overlays/imx519.dtbo ]; then
   dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/imx519.dtbo
   sync
 fi
+if [ -f /usr/share/rpikernelhack/overlays/imx708.dtbo ]; then
+  rm -f /boot/overlays/imx708.dtbo
+  dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/imx708.dtbo
+  sync
+fi
 if [ -f /usr/share/rpikernelhack/overlays/iqaudio-codec.dtbo ]; then
   rm -f /boot/overlays/iqaudio-codec.dtbo
   dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/iqaudio-codec.dtbo
@@ -1064,6 +1084,11 @@ fi
 if [ -f /usr/share/rpikernelhack/overlays/pwm.dtbo ]; then
   rm -f /boot/overlays/pwm.dtbo
   dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/pwm.dtbo
+  sync
+fi
+if [ -f /usr/share/rpikernelhack/overlays/pwm1.dtbo ]; then
+  rm -f /boot/overlays/pwm1.dtbo
+  dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/pwm1.dtbo
   sync
 fi
 if [ -f /usr/share/rpikernelhack/overlays/qca7000-uart0.dtbo ]; then
@@ -1550,22 +1575,22 @@ if [ -f /etc/default/raspberrypi-kernel ]; then
 
 fi
 if [ -d "/etc/kernel/postinst.d" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.76+ --arg=/boot/kernel.img /etc/kernel/postinst.d
-  run-parts -v --report --exit-on-error --arg=5.15.76-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d
-  run-parts -v --report --exit-on-error --arg=5.15.76-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d
-  run-parts -v --report --exit-on-error --arg=5.15.76-v8+ --arg=/boot/kernel8.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=5.15.84+ --arg=/boot/kernel.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=5.15.84-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=5.15.84-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=5.15.84-v8+ --arg=/boot/kernel8.img /etc/kernel/postinst.d
 fi
-if [ -d "/etc/kernel/postinst.d/5.15.76+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.76+ --arg=/boot/kernel.img /etc/kernel/postinst.d/5.15.76+
+if [ -d "/etc/kernel/postinst.d/5.15.84+" ]; then
+  run-parts -v --report --exit-on-error --arg=5.15.84+ --arg=/boot/kernel.img /etc/kernel/postinst.d/5.15.84+
 fi
-if [ -d "/etc/kernel/postinst.d/5.15.76-v7+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.76-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d/5.15.76-v7+
+if [ -d "/etc/kernel/postinst.d/5.15.84-v7+" ]; then
+  run-parts -v --report --exit-on-error --arg=5.15.84-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d/5.15.84-v7+
 fi
-if [ -d "/etc/kernel/postinst.d/5.15.76-v7l+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.76-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d/5.15.76-v7l+
+if [ -d "/etc/kernel/postinst.d/5.15.84-v7l+" ]; then
+  run-parts -v --report --exit-on-error --arg=5.15.84-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d/5.15.84-v7l+
 fi
-if [ -d "/etc/kernel/postinst.d/5.15.76-v8+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.76-v8+ --arg=/boot/kernel8.img /etc/kernel/postinst.d/5.15.76-v8+
+if [ -d "/etc/kernel/postinst.d/5.15.84-v8+" ]; then
+  run-parts -v --report --exit-on-error --arg=5.15.84-v8+ --arg=/boot/kernel8.img /etc/kernel/postinst.d/5.15.84-v8+
 fi
 if [ -d /usr/share/rpikernelhack/overlays ]; then
   rmdir --ignore-fail-on-non-empty /usr/share/rpikernelhack/overlays

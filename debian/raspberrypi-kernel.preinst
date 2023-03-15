@@ -22,6 +22,7 @@ dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/b
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/bcm2710-rpi-zero-2.dtb /boot/bcm2710-rpi-zero-2.dtb
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/bcm2711-rpi-4-b.dtb /boot/bcm2711-rpi-4-b.dtb
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/bcm2711-rpi-400.dtb /boot/bcm2711-rpi-400.dtb
+dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/bcm2711-rpi-cm4-io.dtb /boot/bcm2711-rpi-cm4-io.dtb
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/bcm2711-rpi-cm4.dtb /boot/bcm2711-rpi-cm4.dtb
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/bcm2711-rpi-cm4s.dtb /boot/bcm2711-rpi-cm4s.dtb
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/COPYING.linux /boot/COPYING.linux
@@ -273,6 +274,7 @@ dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/o
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/tc358743.dtbo /boot/overlays/tc358743.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/tinylcd35.dtbo /boot/overlays/tinylcd35.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/tpm-slb9670.dtbo /boot/overlays/tpm-slb9670.dtbo
+dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/tpm-slb9673.dtbo /boot/overlays/tpm-slb9673.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/uart0.dtbo /boot/overlays/uart0.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/uart1.dtbo /boot/overlays/uart1.dtbo
 dpkg-divert --package rpikernelhack --rename --divert /usr/share/rpikernelhack/overlays/uart2.dtbo /boot/overlays/uart2.dtbo
@@ -315,21 +317,21 @@ if [ -f /etc/default/raspberrypi-kernel ]; then
   export RPI_INITRD
 fi
 if [ -d "/etc/kernel/preinst.d" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.84+ --arg=/boot/kernel.img /etc/kernel/preinst.d
-  run-parts -v --report --exit-on-error --arg=5.15.84-v7+ --arg=/boot/kernel7.img /etc/kernel/preinst.d
-  run-parts -v --report --exit-on-error --arg=5.15.84-v7l+ --arg=/boot/kernel7l.img /etc/kernel/preinst.d
-  run-parts -v --report --exit-on-error --arg=5.15.84-v8+ --arg=/boot/kernel8.img /etc/kernel/preinst.d
+  run-parts -v --report --exit-on-error --arg=6.1.19+ --arg=/boot/kernel.img /etc/kernel/preinst.d
+  run-parts -v --report --exit-on-error --arg=6.1.19-v7+ --arg=/boot/kernel7.img /etc/kernel/preinst.d
+  run-parts -v --report --exit-on-error --arg=6.1.19-v7l+ --arg=/boot/kernel7l.img /etc/kernel/preinst.d
+  run-parts -v --report --exit-on-error --arg=6.1.19-v8+ --arg=/boot/kernel8.img /etc/kernel/preinst.d
 fi
-if [ -d "/etc/kernel/preinst.d/5.15.84+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.84+ --arg=/boot/kernel.img /etc/kernel/preinst.d/5.15.84+
+if [ -d "/etc/kernel/preinst.d/6.1.19+" ]; then
+  run-parts -v --report --exit-on-error --arg=6.1.19+ --arg=/boot/kernel.img /etc/kernel/preinst.d/6.1.19+
 fi
-if [ -d "/etc/kernel/preinst.d/5.15.84-v7+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.84-v7+ --arg=/boot/kernel7.img /etc/kernel/preinst.d/5.15.84-v7+
+if [ -d "/etc/kernel/preinst.d/6.1.19-v7+" ]; then
+  run-parts -v --report --exit-on-error --arg=6.1.19-v7+ --arg=/boot/kernel7.img /etc/kernel/preinst.d/6.1.19-v7+
 fi
-if [ -d "/etc/kernel/preinst.d/5.15.84-v7l+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.84-v7l+ --arg=/boot/kernel7l.img /etc/kernel/preinst.d/5.15.84-v7l+
+if [ -d "/etc/kernel/preinst.d/6.1.19-v7l+" ]; then
+  run-parts -v --report --exit-on-error --arg=6.1.19-v7l+ --arg=/boot/kernel7l.img /etc/kernel/preinst.d/6.1.19-v7l+
 fi
-if [ -d "/etc/kernel/preinst.d/5.15.84-v8+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.84-v8+ --arg=/boot/kernel8.img /etc/kernel/preinst.d/5.15.84-v8+
+if [ -d "/etc/kernel/preinst.d/6.1.19-v8+" ]; then
+  run-parts -v --report --exit-on-error --arg=6.1.19-v8+ --arg=/boot/kernel8.img /etc/kernel/preinst.d/6.1.19-v8+
 fi
 #DEBHELPER#

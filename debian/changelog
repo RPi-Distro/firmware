@@ -1,3 +1,10 @@
+raspberrypi-firmware (1:1.20230315-1) bullseye; urgency=medium
+
+  * firmware as of cba2ae16185afbb4895673b6c2ef7d4078abd65f
+  * Linux version 6.1.19
+
+ -- Serge Schneider <serge@raspberrypi.com>  Wed, 15 Mar 2023 15:40:58 +0000
+
 raspberrypi-firmware (1:1.20230306-1) bullseye; urgency=medium
 
   * firmware as of 52185fddc0a9a28472fb3387dbed1a5466e11242

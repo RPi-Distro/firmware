@@ -141,6 +141,11 @@ if [ -f /usr/share/rpikernelhack/bcm2711-rpi-400.dtb ]; then
   dpkg-divert --package rpikernelhack --rename --remove /boot/bcm2711-rpi-400.dtb
   sync
 fi
+if [ -f /usr/share/rpikernelhack/bcm2711-rpi-cm4-io.dtb ]; then
+  rm -f /boot/bcm2711-rpi-cm4-io.dtb
+  dpkg-divert --package rpikernelhack --rename --remove /boot/bcm2711-rpi-cm4-io.dtb
+  sync
+fi
 if [ -f /usr/share/rpikernelhack/bcm2711-rpi-cm4.dtb ]; then
   rm -f /boot/bcm2711-rpi-cm4.dtb
   dpkg-divert --package rpikernelhack --rename --remove /boot/bcm2711-rpi-cm4.dtb
@@ -1396,6 +1401,11 @@ if [ -f /usr/share/rpikernelhack/overlays/tpm-slb9670.dtbo ]; then
   dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/tpm-slb9670.dtbo
   sync
 fi
+if [ -f /usr/share/rpikernelhack/overlays/tpm-slb9673.dtbo ]; then
+  rm -f /boot/overlays/tpm-slb9673.dtbo
+  dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/tpm-slb9673.dtbo
+  sync
+fi
 if [ -f /usr/share/rpikernelhack/overlays/uart0.dtbo ]; then
   rm -f /boot/overlays/uart0.dtbo
   dpkg-divert --package rpikernelhack --rename --remove /boot/overlays/uart0.dtbo
@@ -1575,22 +1585,22 @@ if [ -f /etc/default/raspberrypi-kernel ]; then
 
 fi
 if [ -d "/etc/kernel/postinst.d" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.84+ --arg=/boot/kernel.img /etc/kernel/postinst.d
-  run-parts -v --report --exit-on-error --arg=5.15.84-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d
-  run-parts -v --report --exit-on-error --arg=5.15.84-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d
-  run-parts -v --report --exit-on-error --arg=5.15.84-v8+ --arg=/boot/kernel8.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=6.1.19+ --arg=/boot/kernel.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=6.1.19-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=6.1.19-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d
+  run-parts -v --report --exit-on-error --arg=6.1.19-v8+ --arg=/boot/kernel8.img /etc/kernel/postinst.d
 fi
-if [ -d "/etc/kernel/postinst.d/5.15.84+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.84+ --arg=/boot/kernel.img /etc/kernel/postinst.d/5.15.84+
+if [ -d "/etc/kernel/postinst.d/6.1.19+" ]; then
+  run-parts -v --report --exit-on-error --arg=6.1.19+ --arg=/boot/kernel.img /etc/kernel/postinst.d/6.1.19+
 fi
-if [ -d "/etc/kernel/postinst.d/5.15.84-v7+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.84-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d/5.15.84-v7+
+if [ -d "/etc/kernel/postinst.d/6.1.19-v7+" ]; then
+  run-parts -v --report --exit-on-error --arg=6.1.19-v7+ --arg=/boot/kernel7.img /etc/kernel/postinst.d/6.1.19-v7+
 fi
-if [ -d "/etc/kernel/postinst.d/5.15.84-v7l+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.84-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d/5.15.84-v7l+
+if [ -d "/etc/kernel/postinst.d/6.1.19-v7l+" ]; then
+  run-parts -v --report --exit-on-error --arg=6.1.19-v7l+ --arg=/boot/kernel7l.img /etc/kernel/postinst.d/6.1.19-v7l+
 fi
-if [ -d "/etc/kernel/postinst.d/5.15.84-v8+" ]; then
-  run-parts -v --report --exit-on-error --arg=5.15.84-v8+ --arg=/boot/kernel8.img /etc/kernel/postinst.d/5.15.84-v8+
+if [ -d "/etc/kernel/postinst.d/6.1.19-v8+" ]; then
+  run-parts -v --report --exit-on-error --arg=6.1.19-v8+ --arg=/boot/kernel8.img /etc/kernel/postinst.d/6.1.19-v8+
 fi
 if [ -d /usr/share/rpikernelhack/overlays ]; then
   rmdir --ignore-fail-on-non-empty /usr/share/rpikernelhack/overlays

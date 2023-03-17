@@ -87,7 +87,7 @@ destdir="debian/linux-libc-dev/usr"
 mkdir -p "$destdir"
 (
 	cd linux
-	make headers_check
+	#make headers_check
 	make headers_install INSTALL_HDR_PATH="../$destdir"
 	make distclean
 )

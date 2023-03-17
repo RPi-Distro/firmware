@@ -2,6 +2,7 @@ raspberrypi-firmware (1:1.20230315-1) bullseye; urgency=medium
 
   * firmware as of cba2ae16185afbb4895673b6c2ef7d4078abd65f
   * Linux version 6.1.19
+  * Disable headers-check
 
  -- Serge Schneider <serge@raspberrypi.com>  Wed, 15 Mar 2023 15:40:58 +0000
 

@@ -8,21 +8,21 @@ if [ -f /etc/default/raspberrypi-kernel ]; then
 
 fi
 if [ -d "/etc/kernel/prerm.d" ]; then
-  run-parts -v --report --exit-on-error --arg=6.1.19+ --arg=/boot/kernel.img /etc/kernel/prerm.d
-  run-parts -v --report --exit-on-error --arg=6.1.19-v7+ --arg=/boot/kernel7.img /etc/kernel/prerm.d
-  run-parts -v --report --exit-on-error --arg=6.1.19-v7l+ --arg=/boot/kernel7l.img /etc/kernel/prerm.d
-  run-parts -v --report --exit-on-error --arg=6.1.19-v8+ --arg=/boot/kernel8.img /etc/kernel/prerm.d
+  run-parts -v --report --exit-on-error --arg=6.1.21+ --arg=/boot/kernel.img /etc/kernel/prerm.d
+  run-parts -v --report --exit-on-error --arg=6.1.21-v7+ --arg=/boot/kernel7.img /etc/kernel/prerm.d
+  run-parts -v --report --exit-on-error --arg=6.1.21-v7l+ --arg=/boot/kernel7l.img /etc/kernel/prerm.d
+  run-parts -v --report --exit-on-error --arg=6.1.21-v8+ --arg=/boot/kernel8.img /etc/kernel/prerm.d
 fi
-if [ -d "/etc/kernel/prerm.d/6.1.19+" ]; then
-  run-parts -v --report --exit-on-error --arg=6.1.19+ --arg=/boot/kernel.img /etc/kernel/prerm.d/6.1.19+
+if [ -d "/etc/kernel/prerm.d/6.1.21+" ]; then
+  run-parts -v --report --exit-on-error --arg=6.1.21+ --arg=/boot/kernel.img /etc/kernel/prerm.d/6.1.21+
 fi
-if [ -d "/etc/kernel/prerm.d/6.1.19-v7+" ]; then
-  run-parts -v --report --exit-on-error --arg=6.1.19-v7+ --arg=/boot/kernel7.img /etc/kernel/prerm.d/6.1.19-v7+
+if [ -d "/etc/kernel/prerm.d/6.1.21-v7+" ]; then
+  run-parts -v --report --exit-on-error --arg=6.1.21-v7+ --arg=/boot/kernel7.img /etc/kernel/prerm.d/6.1.21-v7+
 fi
-if [ -d "/etc/kernel/prerm.d/6.1.19-v7l+" ]; then
-  run-parts -v --report --exit-on-error --arg=6.1.19-v7l+ --arg=/boot/kernel7l.img /etc/kernel/prerm.d/6.1.19-v7l+
+if [ -d "/etc/kernel/prerm.d/6.1.21-v7l+" ]; then
+  run-parts -v --report --exit-on-error --arg=6.1.21-v7l+ --arg=/boot/kernel7l.img /etc/kernel/prerm.d/6.1.21-v7l+
 fi
-if [ -d "/etc/kernel/prerm.d/6.1.19-v8+" ]; then
-  run-parts -v --report --exit-on-error --arg=6.1.19-v8+ --arg=/boot/kernel8.img /etc/kernel/prerm.d/6.1.19-v8+
+if [ -d "/etc/kernel/prerm.d/6.1.21-v8+" ]; then
+  run-parts -v --report --exit-on-error --arg=6.1.21-v8+ --arg=/boot/kernel8.img /etc/kernel/prerm.d/6.1.21-v8+
 fi
 #DEBHELPER#

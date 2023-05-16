@@ -1,0 +1,5 @@
+*.debhelper
+*.substvars
+debhelper-build-stamp
+files
+raspi-firmware/

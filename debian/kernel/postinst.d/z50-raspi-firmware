@@ -129,17 +129,17 @@ else
   dtb_path="/usr/lib/linux-image-${latest_kernel#/boot/vmlinuz-}"
 fi
 
-# Do not copy DTBs or kernel/initramfs when removing packages (#1032186)
-if [ "$1" != "remove" ]; then
-  if [ "$KERNEL" = "auto" ] ; then
+if [ "$KERNEL" = "auto" ] ; then
+  latest_kernel_basename=$(basename "$latest_kernel")
+  latest_initrd_basename=$(basename "$latest_initrd")
+  KERNEL=${latest_kernel_basename}
+
+  # Do not copy DTBs or kernel/initramfs when removing packages (#1032186)
+  if [ "$1" != "remove" ]; then
     for dtb in "${dtb_path}"/bcm*.dtb; do
       [ -e "${dtb}" ] || continue
       cp "${dtb}" /boot/firmware/
     done
-
-    latest_kernel_basename=$(basename "$latest_kernel")
-    latest_initrd_basename=$(basename "$latest_initrd")
-    KERNEL=${latest_kernel_basename}
 
     cp "$latest_kernel" /boot/firmware/
     cp "$latest_initrd" /boot/firmware/

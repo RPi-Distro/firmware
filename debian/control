@@ -19,7 +19,4 @@ Replaces: linux-firmware-raspi3 (<< 1.20161123-2), raspi3-firmware (<< 1.2019071
 Suggests: firmware-brcm80211, firmware-misc-nonfree, bluez-firmware
 Description: Raspberry Pi family GPU firmware and bootloaders
  This package contains all the proprietary files necessary to boot a
- Raspberry Pi board. This should work with all models in the 0, 1, 2, 3 and
- 4 families.
- .
- Raspberry Pi is a trademark of the Raspberry Pi Foundation.
+ Raspberry Pi board.

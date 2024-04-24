@@ -1,108 +1,16 @@
-# Note that modifying this file DOES NOT automatically modify the boot
-# arguments used by your computer; this file is called only on
-# firmware or kernel upgrades. You should manually edit
-# /boot/firmware/cmdline.txt to match this file when any changes are
-# made, or run:
+# If set to 'auto' (default), raspi-firmware will automatically copy
+# and rename supported kernels into /boot/firmware
 #
-#      update-initramfs -u -k all
-#
-# in order to regenerate it.
+#KERNEL=auto
 
-# CMA (Contiguous Memory Allocator) pool size - Defaults to 64M.  Uses
-# such as the vc4 video driver might benefit from larger assignations
-# (128M), but at a performance cost for the rest of the system
+# If set to 'auto' (default), raspi-firmware will automatically copy
+# and rename supported initramfs images into /boot/firmware
 #
-# https://people.freedesktop.org/~narmstrong/meson_drm_doc/gpu/vc4.html
-#
-# Note that setting the CMA is not necessary in RPi4 (specifying it
-# might render your system unbootable!)
-#
-# To disable CMA allocation entirely, f.e. for a headless setup, set 
-# CMA=0
-#
-#CMA=64M
+#INITRAMFS=auto
 
-# Filesystem to mount on root. If not specified, find what partition
-# is mounted as the root using 'findmnt -n --output=source /'; if none
-# is reported, fall back to the Raspberry's most usual /dev/mmcblk0p2.
-# but you can specify otherwise, including booting by partition label
-# (i.e. ROOTPART="LABEL=root")
+# If set to yes (NOT default), supported kernels will not trigger
+# initramfs updates on install and upgrade. If this is the desired
+# behaviour, you may also wish to set update_initramfs=no in
+# /etc/initramfs-tools/update-initramfs.conf
 #
-#ROOTPART=/dev/mmcblk0p2
-
-# Main baremetal application that is started by the firmware once the
-# hardware has been initialized. Usually, this is the Linux kernel but
-# this can also be u-boot or barebox launched as a second level
-# bootloader. Possibles values are "auto", so the kernel image will be
-# autodetected from /boot and started directly by the firmware, or the
-# name of the image to use from /boot/firmware
-#
-#KERNEL="auto"
-
-# Pass initramfs address as parameter of the KERNEL image.
-# If you don't intend to pass an initramfs to the image started by the
-# firmware, simply because you have a custom kernel that ships an
-# initramfs or because it will be handled by a second level bootloader
-# (like u-boot), set it to "no". Possibles values are "auto", so the
-# initramfs image will be autodetected from /boot and pass as parameter
-# of the KERNEL image. It can also be set to "no", in this case no
-# initramfs will be handled at all by the firmware.
-#
-#INITRAMFS="auto"
-
-# Consoles to use for logging. This is a list separated by spaces.
-# A tty will be put on all consoles contained in this list, but the last
-# one will be used for system boot logs and for emergency shell. If you want
-# to use the default consoles recommended for the RPIs, leave this value to
-# "auto".
-# Examples:
-# - for logging to an HDMI screen:
-#   CONSOLES="tty0"
-# - for logging to an uart:
-#   CONSOLES="ttyS1,115200"
-# - for logging system boot logs to uart and get a console on the HDMI
-#   screen and on the uart:
-#   CONSOLES="tty0 ttyS1,115200"
-#
-# Note that RPi families 0, 1, 2 usually present their UART at ttyAMA0, and
-# families 3 and 4 present it at ttyS1. "auto" will autodetect which is
-# available in your system.
-#
-#CONSOLES="auto"
-
-# In the RPi4 and p400 families, the video processor (GPU) has several
-# possible operating frequencies, but is known to corrupt the serial
-# console (switch to an invalid baud rate), as the UART (the component
-# which drives the serial ports) gets its clock from the GPU, as
-# explained here:
-#
-# https://www.raspberrypi.com/documentation/computers/configuration.html#mini-uart-and-cpu-core-frequency
-#
-# The clock speeds the RPi4 GPU uses are 360/500/550 MHz. If you
-# intend to use the serial console, you need to set GPU_FREQ to
-# 360. If you intend to use this computer as a desktop system, set it
-# to "auto". Both 500 and 550 MHz also corrupt the serial console.
-#
-# Do note that earlier models have fixed frequencies, and this setting
-# will be ignored if your board does not identify as a RPi 4 (any
-# model) or p400.
-#
-#GPU_FREQ="auto"
-
-# Force the architecture to install the kernel as. You will most
-# likely want to leave this setting alone; the only use case I have
-# found for this is when you want to run a 32-bit userland on a
-# 64-bit-capable system (i.e. RPi families 3 and 4). You will still
-# the firmware to be initialized with 64 bit support active.
-#
-# For further details, please refer to bug reports #971748 and #975943.
-#
-#KERNEL_ARCH="arm64"
-
-# Create a file "/etc/default/raspi-firmware-custom" to add custom parameter
-# to startup the kernel. Maybe not all options are supported.
-# (see https://www.raspberrypi.com/documentation/computers/config_txt.html)
-#
-# To pass extra arbitrary parameters to the kernel at boot, you can specify
-# them in "/etc/default/raspi-extra-cmdline". Keep in mind they should be
-# all in a single line, no comments!
+#SKIP_INITRAMFS_GEN=no

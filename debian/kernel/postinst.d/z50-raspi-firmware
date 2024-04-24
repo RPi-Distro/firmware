@@ -8,9 +8,11 @@ set -e
 # Play nice when run under debconf.
 exec </dev/null >&2
 
+kernel_version="$1"
+image_path="$2"
+
 eval set -- "$DEB_MAINT_PARAMS"
 
-# Only run on configure and remove to avoid unnecessary work.
 case "$1" in
   configure|remove)
     ;;
@@ -19,240 +21,77 @@ case "$1" in
     ;;
 esac
 
-
-pi_4_family() {
-  # This matches all RPi4 boards ("Raspberry Pi 4 Model B Rev 1.4"),
-  # Pi400 full computer systems ("Raspberry Pi 400 Rev 1.0"), and
-  # CM4 compute modules ("Raspberry Pi Compute Module 4 Rev 1.0").
-  grep -q 'Raspberry Pi \(Compute Module \)*4' /sys/firmware/devicetree/base/model 2>/dev/null
-}
-
-is_arm_system() {
-  # Check to see if the host is running an arm-based system
-  # (i.e. whether the raspi-firmware package is useful)
-  DPKG_ARCH=$(dpkg --print-architecture)
-  case "$DPKG_ARCH" in
-    arm64|armel|armhf)
-      return 0;;
-    *)
-      return 1;;
-  esac
-}
+firmware_dst="/boot/firmware"
 
 if ischroot ; then
   true # chroot detected - skip mount point check
 elif [ -e /usr/bin/systemd-detect-virt ] && systemd-detect-virt -q ; then
   true # virtualization detected - skip mount point check
-elif ! is_arm_system ; then
-  # Not running on an arm-based system, skip postinst.
-  exit 0
-elif ! mountpoint -q /boot/firmware ; then
-  echo "raspi-firmware: missing /boot/firmware, did you forget to mount it?" >&2
+elif [ "$(stat -f -c %T "${firmware_dst}")" = "nfs" ]; then
+  true
+elif ! mountpoint -q "${firmware_dst}" ; then
+  echo "raspi-firmware: missing ${firmware_dst}, did you forget to mount it?" >&2
   exit 1
 fi
 
 # Ensure the target directory exists. See https://bugs.debian.org/887062
-mkdir -p /boot/firmware
-
-# shellcheck disable=SC2010
-latest_kernel=$(ls -1 /boot/vmlinuz-* | grep -E -v '\.(dpkg-bak|old-dkms)$' | sort -V -r | head -1)
-if [ -z "$latest_kernel" ] ; then
-  echo "raspi-firmware: no kernel found in /boot/vmlinuz-*, cannot populate /boot/firmware"
-  exit 0
-fi
-
-# shellcheck disable=SC2010
-latest_initrd=$(ls -1 /boot/initrd.img-* | grep -E -v '\.(dpkg-bak|old-dkms)$' | sort -V -r | head -1)
-if [ -z "$latest_initrd" ] ; then
-  echo "raspi-firmware: no initrd found in /boot/initrd.img-*, cannot populate /boot/firmware"
-  exit 0
-fi
+mkdir -p "${firmware_dst}/overlays"
 
 # Default configurations, overridable at /etc/default/raspi-firmware
-CMA=64M
-KERNEL="auto"
-INITRAMFS="auto"
-CONSOLES="auto"
-KERNEL_ARCH=''
+KERNEL=${KERNEL:-auto}
 
 # Load user configuration
 if [ -r /etc/default/raspi-firmware ] ; then
-        . /etc/default/raspi-firmware
+  . /etc/default/raspi-firmware
 fi
 
-# Determine root mountpoint parameters if unset by user
-if [ -z "$ROOTPART" ] ; then
-    root_info () {
-	findmnt --noheading --first-only --nofsroot --output="$1" /
-    }
+# TODO:
+# Handle removal of device tree files
 
-    # Added fallback to avoid breaking the install when running under
-    # a container or virtual environment that does not provide a
-    # usable /proc
-    ROOTPART="$(root_info source)" || ROOTPART=/dev/mmcblk0p2
+flavour="$(echo "$kernel_version" | rev | cut -f1 -d- | rev)"
+case $flavour in
+  v8|2712)
+    dtb_path="/usr/lib/linux-image-${kernel_version}/broadcom"
+    ;;
+  v6|v7|v7l)
+    dtb_path="/usr/lib/linux-image-${kernel_version}"
+    ;;
+  *)
+    echo "ERROR: Unsupported kernel version ($kernel_version)"
+    exit 0
+    ;;
+esac
 
-    # Support for root filesystem on Btrfs or ZFS
-    fstype="$(root_info fstype)" || true
-    case "$fstype" in
-	btrfs)
-	    subvolume="$(root_info fsroot)" &&
-		uuid="$(root_info uuid)" &&
-		ROOTPART="UUID=$uuid rootflags=subvol=$subvolume" ||
-		    echo "raspi-firmware: warning: couldn't find specifics of root Btrfs mount." >&2
-	;;
-	zfs)
-	    ROOTPART="ZFS=$ROOTPART boot=zfs"
-	;;
-    esac
+# Handle kernel files
+if [ "$KERNEL" = "auto" ]; then
+  kernel_dst="$firmware_dst/kernel$(echo "$flavour" | sed 's/^v//;s/^6//;s/2712/_2712/;').img"
+  latest_kernel=$(find /boot -maxdepth 1 -name "vmlinuz-*-rpi-$flavour" -print0 | sort -z -V -r | head -z -n1)
+  overlay_path="/usr/lib/linux-image-${kernel_version}/overlays"
+  case "$1" in
+    configure)
+      if ! [ -e "$image_path" ]; then
+        echo "ERROR: $image_path not found"
+        exit 1
+      elif [ "$image_path" != "$latest_kernel" ]; then
+        exit 0
+      fi
+      rsync -crt "${dtb_path}"/bcm27*.dtb /boot/firmware/
+      rsync -crt "${overlay_path}"/*.dtb* "${overlay_path}"/README "${firmware_dst}/overlays"
+      if [ -e "${firmware_dst}/.firmware_revision" ]; then
+        echo "WARNING: raspi-firmware: replacing rpi-update kernels" >&2
+        rm -f "${firmware_dst}/.firmware_revision"
+      fi
+      cp -v "$image_path" "$kernel_dst"
+      ;;
+    remove)
+      if [ -z "$latest_kernel" ] ; then
+        rm -fv "$kernel_dst"
+        /etc/initramfs/post-update.d/z50-raspi-firmware "$kernel_version" "$(echo "$image_path" | sed 's/vmlinuz/initrd.img/')"
+      fi
+      ;;
+    *)
+      exit 1
+      ;;
+  esac
+  sync "$firmware_dst"
 fi
-
-# Still empty? Do a last guess of default location. This will likely
-# not work, but not including a ROOTPART at all will surely result in
-# a broken system :-\
-if [ -z "$ROOTPART" ] ; then
-  ROOTPART=/dev/mmcblk0p2
-fi
-
-# copy and rename the available device tree binaries
-# the bootloader will pick the right device tree binary
-# if it is named according to the system on chip family name
-if [ -n "$KERNEL_ARCH" ] ; then
-  arch=$KERNEL_ARCH
-else
-  arch=$(dpkg --print-architecture)
-fi
-
-if [ "$arch" = "arm64" ] ; then
-  dtb_path="/usr/lib/linux-image-${latest_kernel#/boot/vmlinuz-}/broadcom"
-else
-  # there is no vendor subdirectory for armhf
-  dtb_path="/usr/lib/linux-image-${latest_kernel#/boot/vmlinuz-}"
-fi
-
-# Do not copy DTBs or kernel/initramfs when removing packages (#1032186)
-if [ "$1" != "remove" ]; then
-  if [ "$KERNEL" = "auto" ] ; then
-    for dtb in "${dtb_path}"/bcm*.dtb; do
-      [ -e "${dtb}" ] || continue
-      cp "${dtb}" /boot/firmware/
-    done
-
-    latest_kernel_basename=$(basename "$latest_kernel")
-    latest_initrd_basename=$(basename "$latest_initrd")
-    KERNEL=${latest_kernel_basename}
-
-    cp "$latest_kernel" /boot/firmware/
-    cp "$latest_initrd" /boot/firmware/
-  fi
-fi
-
-
-
-# Truncate the config.txt file so that we start with a blank slate
-cat >/boot/firmware/config.txt <<EOF
-# Do not modify this file!
-#
-# It is automatically generated upon install or update of either the
-# firmware or the Linux kernel.
-#
-# If you need to set boot-time parameters, do so via the
-# /etc/default/raspi-firmware, /etc/default/raspi-firmware-custom or
-# /etc/default/raspi-extra-cmdline files.
-
-EOF
-
-if [ "$arch" = "arm64" ] ; then
-  cat >>/boot/firmware/config.txt <<EOF
-# Switch the CPU from ARMv7 into ARMv8 (aarch64) mode
-arm_64bit=1
-
-EOF
-fi
-
-if pi_4_family ; then
-  if [ -n "$GPU_FREQ" ] && [ "$GPU_FREQ" != "auto" ] ; then
-    echo "core_freq=$GPU_FREQ" >> /boot/firmware/config.txt
-  fi
-fi
-
-cat >>/boot/firmware/config.txt <<EOF
-enable_uart=1
-upstream_kernel=1
-
-kernel=${KERNEL}
-EOF
-
-if [ "$INITRAMFS" != "no" ] ; then
-  cat >>/boot/firmware/config.txt <<EOF
-# For details on the initramfs directive, see
-# https://www.raspberrypi.org/forums/viewtopic.php?f=63&t=10532
-initramfs ${latest_initrd_basename}
-EOF
-fi
-
-firmware_custom="/etc/default/raspi-firmware-custom"
-if [ -f "$firmware_custom" ] ; then
-  cat >>/boot/firmware/config.txt <<EOF
-
-# Inserted by ${firmware_custom}
-$(cat ${firmware_custom})
-EOF
-fi
-
-# Our cmdline.txt is the default (see http://elinux.org/RPi_cmdline.txt), but
-# without parameters for drivers we do not have (e.g. dwc_otg.lpm_enable) or
-# parameters we do not need (e.g. rootfstype=, as we are using an initrd).
-# We leave the consoles configurable.
-
-pre_cmdline=""
-if [ "$CONSOLES" = "auto" ] ; then
-  # If the user did not specify $CONSOLES, fill in with values
-  # existing in the system. tty0 is guaranteed to exist, no need to
-  # probe.
-  pre_cmdline="console=tty0"
-  if [ -e /dev/ttyAMA0 ] ; then
-    # ttyAMA0 is used in armel, armhf (RPi families 0, 1, 2)
-    pre_cmdline="$pre_cmdline console=ttyAMA0,115200"
-  fi
-  if [ -e /dev/ttyS1 ] ; then
-    # ttyS1 is used in arm64 (RPi families 3, 4)
-    pre_cmdline="$pre_cmdline console=ttyS1,115200"
-  fi
-else
-  # The user has specified one or more consoles
-  for console in $CONSOLES; do
-    pre_cmdline="${pre_cmdline} console=${console}"
-  done
-fi
-
-# GPU and memory architecture are different in RPi model 4, and
-# specifying CMA as with earlier models renders it unbootable. Omit
-# the setting for RPi4 if it is at the default 64M (if the
-# administrator has changed it, they should know what they are doing!)
-if [ "$CMA" = "64M" ] && pi_4_family ; then
-    SET_CMA=''
-elif [ "$CMA" = "0" ] ; then
-    SET_CMA=''
-else
-  SET_CMA="cma=$CMA"
-fi
-
-cmdline_custom="/etc/default/raspi-extra-cmdline"
-if [ -f "$cmdline_custom" ] ; then
-  post_cmdline=$(cat $cmdline_custom)
-fi
-
-cat >/boot/firmware/cmdline.txt <<EOF
-${pre_cmdline} root=$ROOTPART rw fsck.repair=yes net.ifnames=0 $SET_CMA rootwait ${post_cmdline}
-EOF
-
-cd /boot/firmware
-for file in vmlinuz-* initrd.img-*; do
-  if [ ! -e "/boot/$file" ] ; then
-    echo "raspi-firmware: deleting obsolete /boot/firmware/$file (no longer in /boot)"
-    # Keep going if cleanup of individual files fails. It is better for the end
-    # user to have a working package upgrade and a slight waste of space than a
-    # broken upgrade.
-    rm -f "$file" || true
-  fi
-done

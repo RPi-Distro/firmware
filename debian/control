@@ -2,10 +2,7 @@ Source: raspi-firmware
 Rules-Requires-Root: no
 Section: non-free-firmware/misc
 Priority: optional
-Maintainer: pkg-raspi <pkg-raspi-maintainers@lists.alioth.debian.org>
-Uploaders: Michael Stapelberg <stapelberg@debian.org>,
- Gunnar Wolf <gwolf@debian.org>,
- Romain Perier <romain.perier@gmail.com>
+Maintainer: Serge Schneider <serge@raspberrypi.com>
 Build-Depends: debhelper-compat (= 13)
 Standards-Version: 4.6.2
 Homepage: https://github.com/raspberrypi/firmware

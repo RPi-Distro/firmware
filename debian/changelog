@@ -1,3 +1,19 @@
+raspi-firmware (1:1.20240424-1) bookworm; urgency=medium
+
+  * New upstream version 1.20240424
+  * Bump epoch
+  * d/gbp.conf: use git-buildpackage for managing the package
+  * d/watch: use firmware github releases page as upstream source
+  * Add debian/.gitignore
+  * Rework kernel and initramfs hooks
+  * Remove WLAN firmware
+  * d/c: Change Maintainer
+  * d/c: Update VCS information
+  * d/c: raspi-firmware should support all Raspberry Pi boards
+  * d/copyright: don't exclude files
+
+ -- Serge Schneider <serge@raspberrypi.com>  Wed, 24 Apr 2024 17:46:43 +0100
+
 raspi-firmware (1.20230405+ds-2) unstable; urgency=medium
 
   * Skip running postinst if installing on a system that's not arch:arm*

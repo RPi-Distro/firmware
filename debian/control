@@ -6,8 +6,8 @@ Maintainer: Serge Schneider <serge@raspberrypi.com>
 Build-Depends: debhelper-compat (= 13)
 Standards-Version: 4.6.2
 Homepage: https://github.com/raspberrypi/firmware
-Vcs-Git: https://salsa.debian.org/debian/raspi-firmware.git
-Vcs-Browser: https://salsa.debian.org/debian/raspi-firmware
+Vcs-Git: https://github.com/RPi-Distro/firmware.git
+Vcs-Browser: https://github.com/rpi-distro/firmware/
 XS-Autobuild: yes
 
 Package: raspi-firmware

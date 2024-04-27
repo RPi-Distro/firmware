@@ -1,3 +1,9 @@
+raspi-firmware (1.20240424+ds-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Gunnar Wolf <gwolf@debian.org>  Fri, 26 Apr 2024 19:33:42 -0600
+
 raspi-firmware (1.20230405+ds-2) unstable; urgency=medium
 
   * Skip running postinst if installing on a system that's not arch:arm*

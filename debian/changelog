@@ -1,3 +1,10 @@
+raspi-firmware (1:1.20240529-1) bookworm; urgency=medium
+
+  * d/: Update gbp.conf
+  * New upstream version 1.20240529
+
+ -- Serge Schneider <serge@raspberrypi.com>  Wed, 29 May 2024 15:01:05 +0100
+
 raspi-firmware (1:1.20240424-1) bookworm; urgency=medium
 
   * New upstream version 1.20240424

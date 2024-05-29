@@ -1,3 +1,14 @@
+raspi-firmware (1.20240424+ds-2) unstable; urgency=medium
+
+  [ Daniel Moran ]
+  * Ensure kernel and initrd names are set, even on remove (Closes: #1041096)
+
+  [ Jochen Sprickerhof ]
+  * Add dh-sequence-movetousr (Closes: #1071913)
+  * Add myself to uploaders
+
+ -- Jochen Sprickerhof <jspricke@debian.org>  Wed, 29 May 2024 15:13:05 +0200
+
 raspi-firmware (1.20240424+ds-1) unstable; urgency=medium
 
   * New upstream release

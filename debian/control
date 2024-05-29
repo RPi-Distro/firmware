@@ -6,7 +6,8 @@ Maintainer: pkg-raspi <pkg-raspi-maintainers@lists.alioth.debian.org>
 Uploaders: Michael Stapelberg <stapelberg@debian.org>,
  Gunnar Wolf <gwolf@debian.org>,
  Romain Perier <romain.perier@gmail.com>
-Build-Depends: debhelper-compat (= 13)
+Build-Depends: debhelper-compat (= 13),
+ dh-sequence-movetousr,
 Standards-Version: 4.6.2
 Homepage: https://github.com/raspberrypi/firmware
 Vcs-Git: https://salsa.debian.org/debian/raspi-firmware.git

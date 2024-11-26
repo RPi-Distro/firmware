@@ -1,3 +1,9 @@
+raspi-firmware (1:1.20241126-1) bookworm; urgency=medium
+
+  * New upstream version 1.20241126
+
+ -- Serge Schneider <serge@raspberrypi.com>  Tue, 26 Nov 2024 13:04:17 +0000
+
 raspi-firmware (1:1.20240924-2) bookworm; urgency=medium
 
   * Support for running under busybox in a minimal environment

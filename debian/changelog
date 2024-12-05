@@ -1,3 +1,10 @@
+raspi-firmware (1.20240424+ds-3) unstable; urgency=medium
+
+  [ sulincix ]
+  * fix non-arm but chrooted postinst issue
+
+ -- Jochen Sprickerhof <jspricke@debian.org>  Thu, 05 Dec 2024 16:14:08 +0100
+
 raspi-firmware (1.20240424+ds-2) unstable; urgency=medium
 
   [ Daniel Moran ]

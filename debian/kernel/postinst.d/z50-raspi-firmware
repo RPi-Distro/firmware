@@ -39,13 +39,15 @@ is_arm_system() {
   esac
 }
 
+if ! is_arm_system ; then
+  # Not running on an arm-based system, skip postinst.
+  exit 0
+fi
+
 if ischroot ; then
   true # chroot detected - skip mount point check
 elif [ -e /usr/bin/systemd-detect-virt ] && systemd-detect-virt -q ; then
   true # virtualization detected - skip mount point check
-elif ! is_arm_system ; then
-  # Not running on an arm-based system, skip postinst.
-  exit 0
 elif ! mountpoint -q /boot/firmware ; then
   echo "raspi-firmware: missing /boot/firmware, did you forget to mount it?" >&2
   exit 1

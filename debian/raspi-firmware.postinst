@@ -17,14 +17,15 @@ is_arm_system() {
 
 case "$1" in
   configure)
+    if ! is_arm_system ; then
+      # Not running on an arm-based system, skip the postinst
+      exit 0
+    fi
 
     if ischroot ; then
       true # chroot detected - skip mount point check
     elif test -e /usr/bin/systemd-detect-virt && systemd-detect-virt -q ; then
       true # virtualization detected - skip mount point check
-    elif ! is_arm_system ; then
-      # Not running on an arm-based system, skip the postinst
-      exit 0
     elif ! mountpoint -q /boot/firmware; then
       echo "Error: missing /boot/firmware, did you forget to mount it?" >&2
       exit 1

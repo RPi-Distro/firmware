@@ -27,6 +27,7 @@ execute_after_dh_auto_install:
 	[ ! -f  debian/raspi-firmware/usr/lib/raspi-firmware/LICENCE.broadcom ] || rm debian/raspi-firmware/usr/lib/raspi-firmware/LICENCE.broadcom
 	[ ! -d debian/raspi-firmware/lib/firmware ] || base64 -d < brcm80211/brcmfmac43456-sdio.clm_blob.base64 > debian/raspi-firmware/lib/firmware/brcm/brcmfmac43456-sdio.clm_blob
 	[ ! -d debian/raspi-firmware/lib/firmware ] || base64 -d < brcm80211/brcmfmac43456-sdio.bin.base64 > debian/raspi-firmware/lib/firmware/brcm/brcmfmac43456-sdio.bin
+	$(MAKE) -C debian/dtso
 
 # debmake generated override targets
 # This is example for Cmake (See http://bugs.debian.org/641051 )

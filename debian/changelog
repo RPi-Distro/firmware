@@ -1,3 +1,11 @@
+raspi-firmware (1.20240424+ds-4) unstable; urgency=medium
+
+  * Simplify copying firmware files in postinst
+  * Use execute_after_dh_auto_install in d/rules
+  * Add Hifiberry device tree overlays
+
+ -- Jochen Sprickerhof <jspricke@debian.org>  Sat, 21 Dec 2024 21:59:55 +0100
+
 raspi-firmware (1.20240424+ds-3) unstable; urgency=medium
 
   [ sulincix ]

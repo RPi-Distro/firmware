@@ -1,4 +1,6 @@
 boot/* usr/lib/raspi-firmware
+debian/dtso/*.dtbo usr/lib/raspi-firmware/overlays
+debian/dtso/README.md usr/lib/raspi-firmware/overlays
 brcm80211/brcmfmac43430-sdio.txt lib/firmware/brcm
 brcm80211/brcmfmac43455-sdio.txt lib/firmware/brcm
 brcm80211/brcmfmac43456-sdio.txt lib/firmware/brcm

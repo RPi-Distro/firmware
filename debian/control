@@ -9,6 +9,7 @@ Uploaders: Michael Stapelberg <stapelberg@debian.org>,
  Jochen Sprickerhof <jspricke@debian.org>,
 Build-Depends: debhelper-compat (= 13),
  dh-sequence-movetousr,
+ device-tree-compiler,
 Standards-Version: 4.6.2
 Homepage: https://github.com/raspberrypi/firmware
 Vcs-Git: https://salsa.debian.org/debian/raspi-firmware.git

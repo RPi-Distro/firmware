@@ -34,14 +34,8 @@ case "$1" in
     # Ensure the target directory exists. See https://bugs.debian.org/887062
     mkdir -p /boot/firmware
 
-    for file in /usr/lib/raspi-firmware/*
-    do
-      file=$( basename "$file" )
-      cp "/usr/lib/raspi-firmware/$file" "/boot/firmware/$file"
-      # sync might fail when running under qemu, which, as of version 2.7,
-      # has not implemented the syncfs syscall.
-      sync -f "/boot/firmware/$file" || true
-    done
+    cp -r /usr/lib/raspi-firmware/* /boot/firmware/
+    sync -f /boot/firmware || true
 
     # Manually trigger the kernel postinst hook when raspi-firmware is first
     # installed (or upgraded), as the kernel package might already be installed

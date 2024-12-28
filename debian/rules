@@ -21,7 +21,7 @@ include /usr/share/dpkg/default.mk
 %:
 	dh $@
 
-execute_after_dh_auto_install:
+execute_after_dh_install:
 	# Affected paths exist only when building the binary packages;
 	# the conditionals will avoid FTBFS
 	[ ! -f  debian/raspi-firmware/usr/lib/raspi-firmware/LICENCE.broadcom ] || rm debian/raspi-firmware/usr/lib/raspi-firmware/LICENCE.broadcom

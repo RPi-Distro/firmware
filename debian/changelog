@@ -1,3 +1,9 @@
+raspi-firmware (1.20240424+ds-6) unstable; urgency=medium
+
+  * Fix building device tree overlays
+
+ -- Jochen Sprickerhof <jspricke@debian.org>  Sun, 05 Jan 2025 08:48:37 +0100
+
 raspi-firmware (1.20240424+ds-5) unstable; urgency=medium
 
   [ Sjoerd Simons ]

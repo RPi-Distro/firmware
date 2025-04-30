@@ -1,3 +1,9 @@
+raspi-firmware (1:1.20250430-1) bookworm; urgency=medium
+
+  * New upstream version 1.20250430
+
+ -- Serge Schneider <serge@raspberrypi.com>  Wed, 30 Apr 2025 13:55:31 +0100
+
 raspi-firmware (1:1.20250326-1) bookworm; urgency=medium
 
   * New upstream version 1.20250326

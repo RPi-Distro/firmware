@@ -26,6 +26,8 @@ case "$1" in
       true # chroot detected - skip mount point check
     elif test -e /usr/bin/systemd-detect-virt && systemd-detect-virt -q ; then
       true # virtualization detected - skip mount point check
+    elif [ "$(stat -f -c %T /boot/firmware)" = "nfs" ]; then
+      true
     elif ! mountpoint -q /boot/firmware; then
       echo "Error: missing /boot/firmware, did you forget to mount it?" >&2
       exit 1
@@ -40,7 +42,13 @@ case "$1" in
     # Manually trigger the kernel postinst hook when raspi-firmware is first
     # installed (or upgraded), as the kernel package might already be installed
     # (or not upgraded) and hence the hook would not get triggered otherwise.
-    DEB_MAINT_PARAMS="configure" /etc/kernel/postinst.d/z50-raspi-firmware
+    if hash linux-version 2> /dev/null; then
+      linux-version list --paths | while read -r line; do
+        # shellcheck disable=SC2086
+        DEB_MAINT_PARAMS="configure" /etc/kernel/postinst.d/z50-raspi-firmware $line
+      done
+    fi
+
     ;;
 esac
 

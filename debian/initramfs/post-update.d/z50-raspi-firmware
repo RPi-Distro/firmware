@@ -1,9 +1,96 @@
 #!/bin/sh
 # vim:ts=2:sw=2:et
+# see also:
+# https://kernel-team.pages.debian.net/kernel-handbook/ch-update-hooks.html#s-kernel-hooks
 
-if [ -n "$INITRAMFS_TOOLS_KERNEL_HOOK" ]; then
-  echo "raspi-firmware: deferring update via initramfs-tools (hook will be called later by the kernel package)"
+set -e
+
+# Play nice when run under debconf.
+exec </dev/null >&2
+
+initrd_version="$1"
+initrd_path="$2"
+firmware_dst="/boot/firmware"
+
+eval set -- "$DEB_MAINT_PARAMS"
+
+# Only run on configure and remove to avoid unnecessary work.
+case "$1" in
+  configure|remove|"")
+    ;;
+  *)
+    exit 0
+    ;;
+esac
+
+is_arm_system() {
+  # Check to see if the host is running an arm-based system
+  # (i.e. whether the raspi-firmware package is useful)
+  DPKG_ARCH=$(dpkg --print-architecture)
+  case "$DPKG_ARCH" in
+    arm64|armel|armhf)
+      return 0;;
+    *)
+      return 1;;
+  esac
+}
+
+if ! is_arm_system ; then
+  # Not running on an arm-based system, skip postinst.
   exit 0
 fi
 
-DEB_MAINT_PARAMS=configure /etc/kernel/postinst.d/z50-raspi-firmware
+if ischroot ; then
+  true # chroot detected - skip mount point check
+elif [ -e /usr/bin/systemd-detect-virt ] && systemd-detect-virt -q ; then
+  true # virtualization detected - skip mount point check
+elif [ "$(stat -f -c %T "${firmware_dst}")" = "nfs" ]; then
+  true
+elif ! mountpoint -q "${firmware_dst}" ; then
+  echo "raspi-firmware: missing ${firmware_dst}, did you forget to mount it?" >&2
+  exit 1
+fi
+
+# Default configurations, overridable at /etc/default/raspi-firmware
+INITRAMFS=${INITRAMFS:-auto}
+
+# Load user configuration
+if [ -r /etc/default/raspi-firmware ] ; then
+        . /etc/default/raspi-firmware
+fi
+
+flavour="$(echo "$initrd_version" | cut -f3- -d-)"
+
+case $flavour in
+  v8|v8-rt|2712|v6|v7)
+    ;;
+  *)
+    echo "ERROR: Unsupported initramfs version ($initrd_version)"
+    exit 0
+    ;;
+esac
+
+if [ "$INITRAMFS" = "auto" ]; then
+  initrd_dst="$firmware_dst/initramfs$(echo "$flavour" | sed 's/^v//;s/^6//;s/2712/_2712/;s/-/_/;')"
+  latest_initrd=$(find /boot -maxdepth 1 -name "initrd.img-*-rpi-$flavour" -print0 | sort -z -V -r | head -z -n1)
+  case "$1" in
+    configure|"")
+      if ! [ -e "$initrd_path" ]; then
+        echo "WARNING: $initrd_path not found"
+        exit 0
+      elif [ "$initrd_path" != "$latest_initrd" ]; then
+        exit 0
+      fi
+      cp -v "$initrd_path" "$initrd_dst"
+      ;;
+    remove)
+      if [ -z "$latest_initrd" ] ; then
+        rm -fv "$initrd_dst"
+      fi
+      ;;
+    *)
+      exit 1
+      ;;
+  esac
+  sync "$firmware_dst"
+fi

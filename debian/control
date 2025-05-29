@@ -15,7 +15,7 @@ XS-Autobuild: yes
 Package: raspi-firmware
 Architecture: all
 Pre-Depends: dpkg (>= 1.17.14)
-Depends: ${shlibs:Depends}, ${misc:Depends}, dosfstools
+Depends: ${shlibs:Depends}, ${misc:Depends}, dosfstools, rsync
 Breaks: linux-firmware-raspi3 (<< 1.20161123-2), raspi3-firmware (<< 1.20190718-1~)
 Replaces: linux-firmware-raspi3 (<< 1.20161123-2), raspi3-firmware (<< 1.20190718-1~)
 Suggests: firmware-brcm80211, firmware-misc-nonfree, bluez-firmware

@@ -1,3 +1,15 @@
+raspi-firmware (1:1.20250430-1+trixie) trixie; urgency=medium
+
+  * New upstream release
+  * Remove unnecessary files
+  * Add debian/.gitignore
+  * Fix control file
+  * d/watch: use firmware github releases page as upstream source
+  * d/gbp.conf: use git-buildpackage for managing the package
+  * Rework kernel and initramfs hooks
+
+ -- Serge Schneider <serge@raspberrypi.com>  Mon, 02 Jun 2025 18:12:48 +0100
+
 raspi-firmware (1.20240424+ds-6) unstable; urgency=medium
 
   * Fix building device tree overlays

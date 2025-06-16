@@ -42,9 +42,10 @@ if [ -r /etc/default/raspi-firmware ] ; then
   . /etc/default/raspi-firmware
 fi
 
-flavour="$(echo "$initrd_version" | rev | cut -f1 -d- | rev)"
+flavour="$(echo "$initrd_version" | cut -f3- -d-)"
+
 case $flavour in
-  v6|v7|v7l|v8|2712)
+  v8|v8-rt|2712|v6|v7)
     ;;
   *)
     echo "ERROR: Unsupported initramfs version ($initrd_version)"
@@ -54,7 +55,7 @@ esac
 
 # Handle initramfs
 if [ "$INITRAMFS" = "auto" ]; then
-  initrd_dst="$firmware_dst/initramfs$(echo "$flavour" | sed 's/^v//;s/^6//;s/2712/_2712/;')"
+  initrd_dst="$firmware_dst/initramfs$(echo "$flavour" | sed 's/^v//;s/^6//;s/2712/_2712/;s/-/_/;')"
   latest_initrd=$(find /boot -maxdepth 1 -name "initrd.img-*-rpi-$flavour" -print0 | sort -z -V -r | head -z -n1)
   case "$1" in
     configure|"")

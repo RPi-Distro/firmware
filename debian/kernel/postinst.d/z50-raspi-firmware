@@ -48,9 +48,9 @@ fi
 # TODO:
 # Handle removal of device tree files
 
-flavour="$(echo "$kernel_version" | rev | cut -f1 -d- | rev)"
+flavour="$(echo "$kernel_version" | cut -f3- -d-)"
 case $flavour in
-  v8|2712)
+  v8|v8-rt|2712)
     dtb_path="/usr/lib/linux-image-${kernel_version}/broadcom"
     ;;
   v6|v7|v7l)
@@ -64,7 +64,7 @@ esac
 
 # Handle kernel files
 if [ "$KERNEL" = "auto" ]; then
-  kernel_dst="$firmware_dst/kernel$(echo "$flavour" | sed 's/^v//;s/^6//;s/2712/_2712/;').img"
+  kernel_dst="$firmware_dst/kernel$(echo "$flavour" | sed 's/^v//;s/^6//;s/2712/_2712/;s/-/_/;').img"
   latest_kernel=$(find /boot -maxdepth 1 -name "vmlinuz-*-rpi-$flavour" -print0 | sort -z -V -r | head -z -n1)
   overlay_path="/usr/lib/linux-image-${kernel_version}/overlays"
   case "$1" in

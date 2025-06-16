@@ -1,3 +1,9 @@
+raspi-firmware (1:1.20250430-2) bookworm; urgency=medium
+
+  * Add v8-rt kernel support
+
+ -- Serge Schneider <serge@raspberrypi.com>  Mon, 16 Jun 2025 09:41:15 +0100
+
 raspi-firmware (1:1.20250430-1) bookworm; urgency=medium
 
   * New upstream version 1.20250430

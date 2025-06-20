@@ -1,3 +1,10 @@
+raspi-firmware (1:1.20250430-4) trixie; urgency=medium
+
+  * Fix kernel/initramfs flavour check to handle all official formats
+  * Version bump to pass bookworm's
+
+ -- Serge Schneider <serge@raspberrypi.com>  Fri, 20 Jun 2025 11:56:15 +0100
+
 raspi-firmware (1:1.20250430-1+trixie) trixie; urgency=medium
 
   * New upstream release

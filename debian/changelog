@@ -1,3 +1,9 @@
+raspi-firmware (1:1.20250430-3) bookworm; urgency=medium
+
+  * Fix kernel/initramfs flavour check to handle all official formats
+
+ -- Serge Schneider <serge@raspberrypi.com>  Fri, 20 Jun 2025 10:39:40 +0100
+
 raspi-firmware (1:1.20250430-2) bookworm; urgency=medium
 
   * Add v8-rt kernel support

@@ -62,7 +62,7 @@ if [ -r /etc/default/raspi-firmware ] ; then
         . /etc/default/raspi-firmware
 fi
 
-flavour="$(echo "$kernel_version" | cut -f3- -d-)"
+flavour="${kernel_version#*-rpi-}"
 
 case $flavour in
   v8|v8-rt|2712)

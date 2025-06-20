@@ -59,7 +59,7 @@ if [ -r /etc/default/raspi-firmware ] ; then
         . /etc/default/raspi-firmware
 fi
 
-flavour="$(echo "$initrd_version" | cut -f3- -d-)"
+flavour="${initrd_version#*-rpi-}"
 
 case $flavour in
   v8|v8-rt|2712|v6|v7)

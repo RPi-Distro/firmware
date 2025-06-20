@@ -48,7 +48,8 @@ fi
 # TODO:
 # Handle removal of device tree files
 
-flavour="$(echo "$kernel_version" | cut -f3- -d-)"
+flavour="${kernel_version#*-rpi-}"
+
 case $flavour in
   v8|v8-rt|2712)
     dtb_path="/usr/lib/linux-image-${kernel_version}/broadcom"

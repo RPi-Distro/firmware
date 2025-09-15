@@ -1,3 +1,11 @@
+raspi-firmware (1:1.20250915-1) trixie; urgency=medium
+
+  * New upstream version 1.20250915
+  * d/: Try to improve the kernel and initramfs hooks messages a little
+    bit
+
+ -- Serge Schneider <serge@raspberrypi.com>  Mon, 15 Sep 2025 18:24:19 +0100
+
 raspi-firmware (1:1.20250430-4) trixie; urgency=medium
 
   * Fix kernel/initramfs flavour check to handle all official formats

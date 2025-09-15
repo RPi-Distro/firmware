@@ -48,7 +48,8 @@ case $flavour in
   v8|v8-rt|2712|v6|v7|v7l)
     ;;
   *)
-    echo "ERROR: Unsupported initramfs version ($initrd_version)"
+    echo "WARNING: Unsupported initramfs version ($initrd_version) - skipping setup"
+    echo "NOTE: Manual boot configuration may be required"
     exit 0
     ;;
 esac

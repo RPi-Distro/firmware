@@ -72,7 +72,8 @@ case $flavour in
     dtb_path="/usr/lib/linux-image-${kernel_version}"
     ;;
   *)
-    echo "ERROR: Unsupported kernel version ($kernel_version)"
+    echo "WARNING: Unsupported kernel version ($kernel_version) - skipping setup"
+    echo "NOTE: Manual boot configuration may be required"
     exit 0
     ;;
 esac

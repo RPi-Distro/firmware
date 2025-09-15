@@ -1,3 +1,11 @@
+raspi-firmware (1:1.20250915-1~bookworm) bookworm; urgency=medium
+
+  * New upstream version 1.20250915
+  * d/: Try to improve the kernel and initramfs hooks messages a little
+    bit
+
+ -- Serge Schneider <serge@raspberrypi.com>  Mon, 15 Sep 2025 18:32:33 +0100
+
 raspi-firmware (1:1.20250430-4~bookworm) bookworm; urgency=medium
 
   * Re-add v7l kernel to initramfs post-update hook

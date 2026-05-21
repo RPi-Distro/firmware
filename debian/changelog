@@ -1,3 +1,9 @@
+raspi-firmware (1:1.20260521-1) trixie; urgency=medium
+
+  * New upstream version 1.20260521
+
+ -- Serge Schneider <serge@raspberrypi.com>  Thu, 21 May 2026 16:08:44 +0100
+
 raspi-firmware (1:1.20260513-1) trixie; urgency=medium
 
   * New upstream version 1.20260513

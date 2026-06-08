@@ -34,6 +34,9 @@ elif ! mountpoint -q "${firmware_dst}" ; then
   exit 1
 fi
 
+# Ensure the target directory exists. See https://bugs.debian.org/887062
+mkdir -p "${firmware_dst}"
+
 # Default configurations, overridable at /etc/default/raspi-firmware
 INITRAMFS=${INITRAMFS:-auto}
 

@@ -1,3 +1,9 @@
+raspi-firmware (1:1.20260521-3) trixie; urgency=medium
+
+  * Use sync -f to sync the whole filesystem
+
+ -- Serge Schneider <serge@raspberrypi.com>  Tue, 16 Jun 2026 11:59:21 +0100
+
 raspi-firmware (1:1.20260521-2) trixie; urgency=medium
 
   * initramfs hook: create /boot/firmware before copying initrd

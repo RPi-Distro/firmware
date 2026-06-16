@@ -110,5 +110,5 @@ if [ "$KERNEL" = "auto" ]; then
       exit 1
       ;;
   esac
-  sync "$firmware_dst"
+  sync -f "$firmware_dst"
 fi

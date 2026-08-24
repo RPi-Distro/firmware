@@ -1,3 +1,9 @@
+raspi-firmware (1:1.20260824-1) trixie; urgency=medium
+
+  * New upstream version 1.20260824
+
+ -- Serge Schneider <serge@raspberrypi.com>  Mon, 24 Aug 2026 16:01:43 +0100
+
 raspi-firmware (1:1.20260521-3) trixie; urgency=medium
 
   * Use sync -f to sync the whole filesystem

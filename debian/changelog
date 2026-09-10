@@ -1,3 +1,11 @@
+raspi-firmware (1:1.20260907-1~bookworm) bookworm; urgency=medium
+
+  * New upstream version 1.20260907
+  * initramfs hook: create /boot/firmware before copying initrd
+  * Use sync -f to sync the whole filesystem
+
+ -- Serge Schneider <serge@raspberrypi.com>  Thu, 10 Sep 2026 11:48:46 +0100
+
 raspi-firmware (1:1.20260521-1~bookworm) bookworm; urgency=medium
 
   * New upstream version 1.20260521
